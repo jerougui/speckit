@@ -5,6 +5,12 @@
 **Statut**: Brouillon  
 **Entrée**: Description utilisateur: "Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface. Le tout en français comme langue"
 
+## Clarifications
+
+### Session 2026-05-01
+
+- Q: Souhaitez-vous un stockage cloud ou local ? → A: Local-only pour limiter la surface de sécurité et améliorer la performance.
+
 ## Scénarios Utilisateur & Tests *(obligatoire)*
 
 ### Histoire Utilisateur 1 - Créer et Organiser des Albums par Date (Priorité: P1)
@@ -66,6 +72,13 @@ L'utilisateur peut voir les photos d'un album dans une interface en tuiles.
 - **FR-005**: Le système DOIT afficher les photos dans un album en interface tuiles.
 - **FR-006**: Toute l'application DOIT être en français.
 
+### Exigences Non-Fonctionnelles
+
+- **NFR-001**: Toutes les données photo DOIVENT rester locales à l'appareil de l'utilisateur.
+- **NFR-002**: L'application NE DOIT PAS envoyer de photos vers un service distant sans consentement explicite.
+- **NFR-003**: L'interface DOIT charger un album en moins de 2 secondes pour 50 photos.
+- **NFR-004**: Les opérations de réorganisation par drag-and-drop DOIVENT être réactives et ne pas bloquer l'interface.
+
 ### Entités Clés *(inclure si la fonctionnalité implique des données)*
 
 - **Album**: Représente un groupe de photos, avec une date, un nom, et une liste de photos.
@@ -79,9 +92,11 @@ L'utilisateur peut voir les photos d'un album dans une interface en tuiles.
 - **SC-002**: Le système supporte au moins 1000 albums sans dégradation.
 - **SC-003**: 95% des utilisateurs réussissent à réorganiser les albums au premier essai.
 - **SC-004**: Les photos se chargent en moins de 2 secondes dans l'interface tuiles.
+- **SC-005**: Aucune photo n'est transmise à un service distant sans consentement explicite.
 
 ## Hypothèses
 
 - Les photos sont stockées localement sur l'appareil de l'utilisateur.
+- Aucune synchronisation cloud n'est implémentée par défaut.
 - L'application fonctionne sur un navigateur web moderne.
 - Les utilisateurs ont des connaissances de base en informatique.
