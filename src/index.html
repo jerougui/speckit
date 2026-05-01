@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organisateur d'Albums Photos</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <h1>Organisateur d'Albums Photos</h1>
+        <p>Regroupez vos photos par date, réorganisez vos albums et visualisez-les en mode tuiles.</p>
+      </header>
+
+      <section class="workspace">
+        <aside class="sidebar">
+          <div class="panel">
+            <h2>Créer un album</h2>
+            <form id="album-form">
+              <label for="album-title">Nom de l'album</label>
+              <input id="album-title" type="text" placeholder="Nom de l'album" required />
+
+              <label for="album-date">Date de l'album</label>
+              <input id="album-date" type="date" required />
+
+              <button type="submit">Créer l'album</button>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2>Albums</h2>
+            <div id="album-list" class="album-list" aria-label="Liste des albums"></div>
+          </div>
+        </aside>
+
+        <main class="main-panel">
+          <div class="panel panel-top">
+            <h2>Photos de l'album</h2>
+            <div class="photo-actions">
+              <label class="file-button">
+                Ajouter des photos
+                <input id="photo-input" type="file" accept="image/*" multiple />
+              </label>
+              <span id="selected-album-label">Sélectionnez un album pour ajouter des photos</span>
+            </div>
+          </div>
+
+          <div id="photo-grid" class="photo-grid" aria-live="polite"></div>
+        </main>
+      </section>
+    </div>
+
+    <div id="photo-modal" class="photo-modal hidden" role="dialog" aria-modal="true">
+      <button id="close-modal" class="modal-close">✕</button>
+      <img id="modal-image" alt="Photo en plein écran" />
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
