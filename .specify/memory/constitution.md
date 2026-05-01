@@ -1,50 +1,44 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: placeholder template → 1.0.0
+- Modified principles: added Library-First, Test-First, Functional Design, Composable Independence, Pragmatic Simplicity
+- Added sections: Additional Constraints, Development Workflow
+- Removed sections: none
+- Templates checked: ✅ .specify/templates/plan-template.md, ✅ .specify/templates/spec-template.md, ✅ .specify/templates/tasks-template.md
+- Deferred items: none
+-->
+
+# Speckit Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Library-First
+Every feature MUST begin as a standalone library. Libraries MUST be independently usable, have a well-defined public contract, and expose behavior through composable APIs rather than application-specific side effects.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Test-First
+Test-driven development is mandatory. Every library MUST start with a failing test that defines its expected behavior, then move through red-green-refactor with no implementation before the test exists.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Functional Design
+Library implementations MUST favor pure functions, explicit inputs, and immutable values. Side effects are restricted to small, isolated adapters that are separately tested and composed.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Independent, Composable Design
+Every library MUST support independent validation and reuse. Shared behavior is composed from smaller libraries rather than duplicated, and dependencies are chosen to keep the smallest practical contract.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Pragmatic Simplicity
+Designs MUST be simple enough to understand, test, and evolve. Complexity is only justified when it is the simplest correct solution for a real requirement.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints
+The project MUST maintain a library-first architecture even when delivering higher-level tools. Application-level artifacts are assembled from libraries; no feature may be implemented solely as an internal monolith.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+Workflows MUST enforce strict TDD and functional style. Every pull request MUST include tests for new behavior, a clear library contract, and review evidence that the change remains independently testable.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution is the primary source of development rules for the repository. All feature definitions, plans, and implementation work MUST be measured against these principles.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- Amendments MUST be captured in a revised constitution document and approved by the team before the next development cycle.
+- Changes that affect the library-first architecture or TDD requirement MUST include a migration plan and explicit review notes.
+- Compliance reviews MUST verify that new libraries are independently testable, that tests were written first, and that implementations remain functionally decomposed.
+- If a principle conflict arises, the team MUST resolve it by preserving the stronger requirement for independent library quality and test-first behavior.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-05-01 | **Last Amended**: 2026-05-01
