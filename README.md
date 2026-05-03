@@ -1,3 +1,12 @@
+## 🚀 Démo en ligne
+
+Une version déployée du projet est disponible sur GitHub Pages :
+
+👉 **https://jerougui.github.io/speckit/**
+
+Cela permet de visualiser rapidement le rendu sans installation locale.
+
+
 # Organisateur d'Albums Photos - Spec Kit Process
 
 Un exemple d'application web pour organiser des photos par albums, développée selon le processus **Spec Kit**.
