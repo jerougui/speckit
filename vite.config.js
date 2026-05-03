@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: '/speckit/',   // <-- indispensable pour GitHub Pages
   root: 'src',
   build: {
     outDir: '../dist'
