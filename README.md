@@ -31,12 +31,12 @@ graph TD
     E --> F[Implémentation]
     F --> G[Première PR]
     G --> H[Phase itérative]
-    H --> I[/specify - Nouvelle feature]
+    H --> I["/specify - Nouvelle feature/"]
     I --> B
 
     style A fill:#e1f5fe
-    style G fill:#c8e6c9
-    style H fill:#fff3e0
+    style G fill:#c3e63c
+    style H fill:#2cf3c0
 ```
 
 ## Phase 1 : Construction initiale

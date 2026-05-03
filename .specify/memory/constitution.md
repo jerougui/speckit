@@ -1,44 +1,44 @@
 <!--
-Sync Impact Report
-- Version change: placeholder template → 1.0.0
-- Modified principles: added Library-First, Test-First, Functional Design, Composable Independence, Pragmatic Simplicity
-- Added sections: Additional Constraints, Development Workflow
-- Removed sections: none
-- Templates checked: ✅ .specify/templates/plan-template.md, ✅ .specify/templates/spec-template.md, ✅ .specify/templates/tasks-template.md
-- Deferred items: none
+Rapport d'Impact de Synchronisation
+- Changement de version : modèle placeholder → 1.0.0
+- Principes modifiés : ajout de Library-First, Test-First, Functional Design, Composable Independence, Pragmatic Simplicity
+- Sections ajoutées : Contraintes Supplémentaires, Workflow de Développement
+- Sections supprimées : aucune
+- Modèles vérifiés : ✅ .specify/templates/plan-template.md, ✅ .specify/templates/spec-template.md, ✅ .specify/templates/tasks-template.md
+- Éléments différés : aucun
 -->
 
-# Speckit Constitution
+# Constitution Speckit
 
-## Core Principles
+## Principes de Base
 
 ### I. Library-First
-Every feature MUST begin as a standalone library. Libraries MUST be independently usable, have a well-defined public contract, and expose behavior through composable APIs rather than application-specific side effects.
+Chaque fonctionnalité DOIT commencer comme une bibliothèque autonome. Les bibliothèques DOIVENT être indépendamment utilisables, avoir un contrat public bien défini, et exposer le comportement via des APIs composables plutôt que des effets de bord spécifiques à l'application.
 
 ### II. Test-First
-Test-driven development is mandatory. Every library MUST start with a failing test that defines its expected behavior, then move through red-green-refactor with no implementation before the test exists.
+Le développement piloté par les tests est obligatoire. Chaque bibliothèque DOIT commencer par un test échouant qui définit son comportement attendu, puis passer par rouge-vert-refactor sans implémentation avant que le test existe.
 
-### III. Functional Design
-Library implementations MUST favor pure functions, explicit inputs, and immutable values. Side effects are restricted to small, isolated adapters that are separately tested and composed.
+### III. Design Fonctionnel
+Les implémentations de bibliothèque DOIVENT favoriser les fonctions pures, les entrées explicites, et les valeurs immuables. Les effets de bord sont restreints à de petits adaptateurs isolés qui sont testés séparément et composés.
 
-### IV. Independent, Composable Design
-Every library MUST support independent validation and reuse. Shared behavior is composed from smaller libraries rather than duplicated, and dependencies are chosen to keep the smallest practical contract.
+### IV. Design Indépendant, Composable
+Chaque bibliothèque DOIT supporter la validation et la réutilisation indépendantes. Le comportement partagé est composé à partir de bibliothèques plus petites plutôt que dupliqué, et les dépendances sont choisies pour maintenir le contrat le plus petit possible.
 
-### V. Pragmatic Simplicity
-Designs MUST be simple enough to understand, test, and evolve. Complexity is only justified when it is the simplest correct solution for a real requirement.
+### V. Simplicité Pragmatique
+Les designs DOIVENT être suffisamment simples pour être compris, testés, et évolués. La complexité n'est justifiée que lorsqu'elle est la solution la plus simple correcte pour une exigence réelle.
 
-## Additional Constraints
-The project MUST maintain a library-first architecture even when delivering higher-level tools. Application-level artifacts are assembled from libraries; no feature may be implemented solely as an internal monolith.
+## Contraintes Supplémentaires
+Le projet DOIT maintenir une architecture library-first même lors de la livraison d'outils de niveau supérieur. Les artefacts au niveau application sont assemblés à partir de bibliothèques ; aucune fonctionnalité ne peut être implémentée uniquement comme un monolithe interne.
 
-## Development Workflow
-Workflows MUST enforce strict TDD and functional style. Every pull request MUST include tests for new behavior, a clear library contract, and review evidence that the change remains independently testable.
+## Workflow de Développement
+Les workflows DOIVENT appliquer un style TDD et fonctionnel strict. Chaque pull request DOIT inclure des tests pour le nouveau comportement, un contrat de bibliothèque clair, et des preuves de révision que le changement reste testable indépendamment.
 
-## Governance
-This constitution is the primary source of development rules for the repository. All feature definitions, plans, and implementation work MUST be measured against these principles.
+## Gouvernance
+Cette constitution est la source primaire des règles de développement pour le dépôt. Toutes les définitions de fonctionnalités, plans, et travaux d'implémentation DOIVENT être mesurés contre ces principes.
 
-- Amendments MUST be captured in a revised constitution document and approved by the team before the next development cycle.
-- Changes that affect the library-first architecture or TDD requirement MUST include a migration plan and explicit review notes.
-- Compliance reviews MUST verify that new libraries are independently testable, that tests were written first, and that implementations remain functionally decomposed.
-- If a principle conflict arises, the team MUST resolve it by preserving the stronger requirement for independent library quality and test-first behavior.
+- Les amendements DOIVENT être capturés dans un document de constitution révisé et approuvés par l'équipe avant le prochain cycle de développement.
+- Les changements qui affectent l'architecture library-first ou l'exigence TDD DOIVENT inclure un plan de migration et des notes de révision explicites.
+- Les révisions de conformité DOIVENT vérifier que les nouvelles bibliothèques sont testables indépendamment, que les tests ont été écrits en premier, et que les implémentations restent fonctionnellement décomposées.
+- Si un conflit de principe survient, l'équipe DOIT le résoudre en préservant l'exigence la plus forte pour la qualité de bibliothèque indépendante et le comportement test-first.
 
-**Version**: 1.0.0 | **Ratified**: 2026-05-01 | **Last Amended**: 2026-05-01
+**Version** : 1.0.0 | **Ratifiée** : 2026-05-01 | **Dernière Modification** : 2026-05-01

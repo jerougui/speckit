@@ -1,3 +1,3 @@
 <!-- SPECKIT START -->
-Plan: specs/001-organisateur-albums-photos/plan.md
+Plan: specs/002-user-auth/plan.md
 <!-- SPECKIT END -->
