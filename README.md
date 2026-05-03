@@ -2,6 +2,12 @@
 
 Un exemple d'application web pour organiser des photos par albums, développée selon le processus **Spec Kit**.
 
+## 🚀 Démo en ligne
+
+**Accédez à l'application déployée** : https://jerougui.github.io/speckit/
+
+L'app fonctionne directement dans votre navigateur avec stockage local. Aucune inscription requise.
+
 ## Vue d'ensemble du processus Spec Kit
 
 Spec Kit est une méthodologie de développement logiciel qui combine :
