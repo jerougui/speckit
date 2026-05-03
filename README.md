@@ -180,6 +180,11 @@ Ce projet suit le processus Spec Kit :
 2. Suivre le cycle complet : plan → tâches → analyse → implémentation
 3. Créer une PR avec tests et documentation
 
+## 📚 Références
+
+- Documentation officielle Spec‑Kit : https://github.github.com/spec-kit/index.html  
+- Méthode BMAD (méthodologie similaire) : https://docs.bmad-method.org/fr/
+
 ## Licence
 
 MIT</content>
