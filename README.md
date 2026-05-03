@@ -108,6 +108,154 @@ speckit/
 ├── tests/                      # Tests
 └── package.json               # Dépendances
 ```
+# 🧩 Description détaillée des étapes Spec‑Kit  
+### …et ce qui est attendu de vous à chaque étape
+
+Chaque étape produit un artefact et nécessite une **validation humaine** avant de passer à la suivante.
+
+---
+
+## **1. Constitution — `/speckit.constitution`**
+
+### 🎯 Objectif  
+Définir les principes fondamentaux du projet.
+
+### 📄 Produit  
+`specs/constitution.md`
+
+### 🧠 Ce qui est attendu de vous  
+- Vérifier que les principes correspondent à votre vision  
+- Ajuster les règles si elles sont trop vagues ou trop strictes  
+
+### 🔎 Comment relire  
+- Les règles sont‑elles applicables ?  
+- Y a‑t‑il des contradictions ?  
+- Le document est‑il compréhensible par un autre développeur ?
+
+---
+
+## **2. Spécification — `/speckit.specify`**
+
+### 🎯 Objectif  
+Décrire la fonctionnalité en langage naturel.
+
+### 📄 Produit  
+`specs/<feature>/spec.md`
+
+### 🧠 Ce qui est attendu de vous  
+- Lire la spec comme un Product Owner  
+- Vérifier que rien n’est oublié  
+- Clarifier les zones floues  
+
+### 🔎 Comment relire  
+- Les user stories couvrent‑elles tous les cas ?  
+- Les comportements sont‑ils bien définis ?  
+- Les exemples sont‑ils suffisants ?
+
+---
+
+## **3. Planification — `/speckit.plan`**
+
+### 🎯 Objectif  
+Transformer la spec en un plan technique.
+
+### 📄 Produit  
+`plan.md`, `data-model.md`, `contracts/`, `research.md`
+
+### 🧠 Ce qui est attendu de vous  
+- Vérifier la cohérence technique  
+- Ajuster les choix d’architecture  
+- Ajouter les contraintes non mentionnées  
+
+### 🔎 Comment relire  
+- Le modèle de données est‑il complet ?  
+- Les flux sont‑ils cohérents ?  
+- Les décisions techniques sont‑elles réalistes ?
+
+---
+
+## **4. Génération des tâches — `/speckit.tasks`**
+
+### 🎯 Objectif  
+Décomposer la feature en tâches actionnables.
+
+### 📄 Produit  
+`tasks.md`
+
+### 🧠 Ce qui est attendu de vous  
+- Vérifier que les tâches sont réalisables  
+- Ajouter/retirer des tâches si nécessaire  
+- Confirmer l’ordre logique  
+
+### 🔎 Comment relire  
+- Chaque tâche est‑elle testable ?  
+- Les dépendances sont‑elles correctes ?  
+- Rien d’important n’a‑t‑il été oublié ?
+
+---
+
+## **5. Analyse & validation — `/speckit.analyze`**
+
+### 🎯 Objectif  
+Vérifier la cohérence globale.
+
+### 📄 Produit  
+`review.md`
+
+### 🧠 Ce qui est attendu de vous  
+- Lire les remarques  
+- Corriger les incohérences  
+- Confirmer que tout est prêt pour l’implémentation  
+
+### 🔎 Comment relire  
+- Les fichiers se contredisent‑ils ?  
+- Les tâches couvrent‑elles toute la spec ?  
+- Le plan est‑il réalisable ?
+
+---
+
+## **6. Implémentation — `/speckit.implement`**
+
+### 🎯 Objectif  
+Générer le code initial et commencer le développement.
+
+### 📄 Produit  
+- Squelettes de fichiers  
+- Tests TDD  
+- Modules initiaux
+
+### 🧠 Ce qui est attendu de vous  
+- Ajuster le code généré  
+- Compléter les parties manquantes  
+- Exécuter les tests  
+
+### 🔎 Comment relire  
+- Le code respecte‑t‑il la spec ?  
+- Les tests couvrent‑ils les cas importants ?  
+- Le style est‑il cohérent ?
+
+---
+
+## **7. Première Pull Request**
+
+### 🎯 Objectif  
+Finaliser la feature.
+
+### 🧠 Ce qui est attendu de vous  
+- Vérifier que tout est testé  
+- Vérifier que la documentation est à jour  
+- Ouvrir une PR propre et lisible  
+
+---
+
+## **8. Phase itérative**
+
+### 🎯 Objectif  
+Améliorer, corriger, étendre.
+
+### 🧠 Ce qui est attendu de vous  
+- Utiliser `/speckit.specify` pour chaque nouvelle feature  
+- Reprendre le cycle complet  
 
 ## Technologies utilisées
 
