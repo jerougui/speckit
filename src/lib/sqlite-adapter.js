@@ -1,6 +1,10 @@
-import initSqlJs from 'sql.js';
+import initSqlJs from 'sql.js/dist/sql-wasm.js';
+import sqlWasmUrl from 'sql.js/dist/sql-wasm.wasm?url';
 
-const STORAGE_KEY = 'organisateur-albums-photos-db';
+const DB_NAME = 'organisateur-albums-photos-db';
+const DB_VERSION = 3;
+const SQLITE_STORE = 'sqlite';
+
 let SQL;
 let db;
 
@@ -18,14 +22,35 @@ function deserializeDatabase(json) {
   }
 }
 
+async function openIndexedDb() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = event => {
+      const idb = event.target.result;
+      if (!idb.objectStoreNames.contains(SQLITE_STORE)) {
+        idb.createObjectStore(SQLITE_STORE);
+      }
+
+      // Supprimer l'ancien store photo-files s'il existe (migration)
+      if (idb.objectStoreNames.contains('photo-files')) {
+        idb.deleteObjectStore('photo-files');
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
 export async function initSqlite() {
   if (!SQL) {
     SQL = await initSqlJs({
-      locateFile: file => `https://sql.js.org/dist/${file}`
+      locateFile: () => sqlWasmUrl
     });
   }
 
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = await loadSavedDatabase();
   if (saved) {
     const data = deserializeDatabase(saved);
     if (data) {
@@ -39,6 +64,30 @@ export async function initSqlite() {
 
   initSchema();
   return db;
+}
+
+async function loadSavedDatabase() {
+  const idb = await openIndexedDb();
+  return new Promise((resolve, reject) => {
+    const tx = idb.transaction(SQLITE_STORE, 'readonly');
+    const store = tx.objectStore(SQLITE_STORE);
+    const request = store.get('db');
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function saveDatabase(content) {
+  const idb = await openIndexedDb();
+  return new Promise((resolve, reject) => {
+    const tx = idb.transaction(SQLITE_STORE, 'readwrite');
+    const store = tx.objectStore(SQLITE_STORE);
+    const request = store.put(content, 'db');
+
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
 }
 
 function initSchema() {
@@ -55,7 +104,7 @@ function initSchema() {
     id TEXT PRIMARY KEY,
     album_id TEXT NOT NULL,
     file_name TEXT NOT NULL,
-    data_url TEXT NOT NULL,
+    data_url TEXT,
     date_taken TEXT NOT NULL,
     metadata TEXT,
     added_at TEXT NOT NULL,
@@ -71,7 +120,10 @@ export function execute(sql, params = []) {
   } finally {
     statement.free();
   }
-  persistDatabase();
+
+  persistDatabase().catch(error => {
+    console.error('Erreur de persistence de la base SQLite', error);
+  });
 }
 
 export function all(sql, params = []) {
@@ -88,7 +140,7 @@ export function all(sql, params = []) {
   return rows;
 }
 
-export function persistDatabase() {
+export async function persistDatabase() {
   const content = serializeDatabase(db);
-  localStorage.setItem(STORAGE_KEY, content);
+  await saveDatabase(content);
 }

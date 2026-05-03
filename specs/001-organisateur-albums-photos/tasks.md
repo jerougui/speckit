@@ -1,4 +1,4 @@
-# Tasks: Organisateur d'Albums Photos
+--# Tasks: Organisateur d'Albums Photos
 
 **Input**: Design documents from `/specs/001-organisateur-albums-photos/`
 **Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/ui-contract.md

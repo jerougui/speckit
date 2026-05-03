@@ -5,6 +5,11 @@ import { renderAlbumList } from './ui/album-list.js';
 import { renderPhotoGrid, bindPhotoPreview, closePreview } from './ui/photo-tile-view.js';
 import { setupDragDrop } from './ui/drag-drop.js';
 
+// Configuration
+const CONFIG = {
+  photoStoragePath: './albums' // Dossier où organiser les photos par album
+};
+
 const albumForm = document.getElementById('album-form');
 const albumTitleInput = document.getElementById('album-title');
 const albumDateInput = document.getElementById('album-date');
@@ -55,8 +60,17 @@ async function handleAlbumSelect(albumId) {
   selectedAlbumId = albumId;
   renderAlbums();
   updateSelectedAlbumLabel();
+
+  // Nettoyer les URLs d'objet de l'album précédent
+  await photoModel.cleanup();
+
   const photos = await photoModel.getPhotos(albumId);
   renderPhotoGrid(photos, showPhotoPreview);
+
+  // Si pas de photos affichables (URLs blob perdues après refresh), informer l'utilisateur
+  if (photos.length > 0 && photos.every(p => !p.data_url || p.data_url.startsWith('blob:'))) {
+    console.warn('Les images ne sont pas persistées après un refresh de page. Re-sélectionnez l\'album pour les recharger.');
+  }
 }
 
 async function handleAlbumDelete(albumId) {
@@ -93,18 +107,35 @@ albumForm.addEventListener('submit', async event => {
 
 photoInput.addEventListener('change', async event => {
   if (!selectedAlbumId) {
+    alert('Sélectionnez d’abord un album avant d’ajouter des photos.');
+    event.target.value = null;
     return;
   }
 
   const files = Array.from(event.target.files || []);
-  for (const file of files) {
-    const photo = await photoModel.createPhotoFromFile(file, selectedAlbumId);
-    await photoModel.savePhoto(photo);
-  }
 
-  const photos = await photoModel.getPhotos(selectedAlbumId);
-  renderPhotoGrid(photos, showPhotoPreview);
-  photoInput.value = null;
+  try {
+    // Organiser et copier les photos dans le dossier de l'album
+    const organizedPhotos = await photoModel.organizePhotosForAlbum(selectedAlbumId, files);
+
+    // Sauvegarder chaque photo organisée
+    for (const photo of organizedPhotos) {
+      await photoModel.savePhoto(photo);
+    }
+
+    const photos = await photoModel.getPhotos(selectedAlbumId);
+    renderPhotoGrid(photos, showPhotoPreview);
+    photoInput.value = null;
+
+    // Mettre à jour l'affichage des albums pour refléter le nouveau nombre de photos
+    currentAlbums = await albumStore.getAlbums();
+    renderAlbums();
+
+    alert(`${organizedPhotos.length} photo(s) ajoutée(s) et organisée(s) dans le dossier de l'album.`);
+  } catch (error) {
+    console.error('Erreur lors de l\'organisation des photos:', error);
+    alert('Erreur lors de l\'organisation des photos. Elles ont été ajoutées pour affichage seulement.');
+  }
 });
 
 function showPhotoPreview(photo) {
@@ -126,4 +157,9 @@ photoModal.addEventListener('click', event => {
 
 initApp().catch(error => {
   console.error('Erreur d’initialisation de l’application', error);
+});
+
+// Nettoyer les URLs d'objet quand on quitte la page
+window.addEventListener('beforeunload', () => {
+  photoModel?.cleanup();
 });
