@@ -38,6 +38,7 @@ graph TD
     style G fill:#c3e63c
     style H fill:#2cf3c0
 ```
+![Workflow](./workflow-map.png)
 
 ## Phase 1 : Construction initiale
 
